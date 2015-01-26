@@ -61,8 +61,16 @@ function numberClicked(e) {
   resultDisplay.innerText += e.target.innerText;
 }
 
-function operationClicked() {
+function operationClicked(e) {
+  var operations = {
+    'add': AddOperation,
+    'subtract': SubtractOperation,
+    'multiply': MultiplyOperation,
+    'divide': DivideOperation,
+  }
+  
   leftOperand = parseInt(resultDisplay.innerText);
+  operationClass = operations[e.target.attributes['id'].value];
   clearDisplay();
 }
 
@@ -106,16 +114,13 @@ function clearClicked() {
 window.onload = function() {
   resultDisplay = document.querySelector('#result_display');
 
-  var buttons = document.querySelectorAll('.button:not(.operation)');
+  var buttons = document.querySelectorAll('.button.number');
 
   for(var i = 0; i < buttons.length; i++) {
     buttons[i].addEventListener('click', numberClicked);
   }
 
-  document.querySelector('.add').addEventListener('click', addClicked);
-  document.querySelector('.subtract').addEventListener('click', subtractClicked);
-  document.querySelector('.multiply').addEventListener('click', multiplyClicked);
-  document.querySelector('.divide').addEventListener('click', divideClicked);
+  document.querySelector('.operation').addEventListener('click', operationClicked);
 
   document.querySelector('#ent').addEventListener('click', enterClicked);
   document.querySelector('#clr').addEventListener('click', clearClicked);
