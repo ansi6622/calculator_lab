@@ -68,30 +68,11 @@ function operationClicked(e) {
     'multiply': MultiplyOperation,
     'divide': DivideOperation,
   }
-  
+
+  var operationName = e.target.attributes['id'].value;
   leftOperand = parseInt(resultDisplay.innerText);
-  operationClass = operations[e.target.attributes['id'].value];
+  operationClass = operations[operationName];
   clearDisplay();
-}
-
-function addClicked() {
-  operationClass = AddOperation;
-  operationClicked();
-}
-
-function subtractClicked() {
-  operationClass = SubtractOperation;
-  operationClicked();
-}
-
-function multiplyClicked() {
-  operationClass = MultiplyOperation;
-  operationClicked();
-}
-
-function divideClicked() {
-  operationClass = DivideOperation;
-  operationClicked();
 }
 
 function clearDisplay() {
@@ -114,10 +95,10 @@ function clearClicked() {
 window.onload = function() {
   resultDisplay = document.querySelector('#result_display');
 
-  var buttons = document.querySelectorAll('.button.number');
+  var numberButtons = document.querySelectorAll('.button.number');
 
-  for(var i = 0; i < buttons.length; i++) {
-    buttons[i].addEventListener('click', numberClicked);
+  for(var i = 0; i < numberButtons.length; i++) {
+    numberButtons[i].addEventListener('click', numberClicked);
   }
 
   document.querySelector('.operation').addEventListener('click', operationClicked);
